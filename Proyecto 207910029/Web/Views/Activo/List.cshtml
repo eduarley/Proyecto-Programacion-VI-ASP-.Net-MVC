@@ -1,0 +1,218 @@
+﻿@model IEnumerable<Infraestructure.Models.Activo>
+
+@{
+    ViewBag.Title = "Lista Activos";
+}
+
+<h2>Activos</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-success glyphicon-plus" })
+</p>
+<table class="table-hover table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Serie)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.VencimientoGarantia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VencimientoSeguro)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.CostoDolar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoColon)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Condicion)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.ImgFactura)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImgActivo)
+        </th>*@
+        @*<th>
+            @Html.DisplayNameFor(model => model.Aseguradora)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Marca)
+        </th>
+        <th>
+            @Html.DisplayName("Tipo")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Vendedor.Ente)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.ImgActivo)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Serie)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Modelo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaCompra)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.VencimientoGarantia)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VencimientoSeguro)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.ValorActual)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.CostoDolar)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CostoColon)
+            </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Condicion)
+            </td>*@
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.ImgFactura)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ImgActivo)
+                </td>*@
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Aseguradora.Descripcion)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoActivo.Descripcion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.Vendedor.Ente)
+            </td>*@
+
+        <td>
+            @if (item.ImgActivo != null)
+            {
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.ImgActivo)" id="ImagenProducto" style="height:75px;width:75px">
+
+            }
+            else
+            {
+                <p>Sin imagen</p>
+            }
+        </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" }) 
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" }) 
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/toastjs")
+    @Scripts.Render("~/bundles/jqueryui")
+
+
+
+
+    <script>
+
+        $(document).ready(function () {
+             console.log("Entro a JQuery")
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "5000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+                // Recibe los parámetros del Controller
+                var option = '@TempData["Action"]'
+                var message = '@TempData["Message"]'
+
+
+                if (option == 'S') {
+                    toastr.success("El registro fue salvado correctamente");
+                }
+
+
+                 if (option == 'D') {
+                    toastr.success("El registro fue borrado correctamente");
+                }
+
+
+                 if (option == 'U') {
+                    toastr.success("El registro fue actualizado correctamente");
+                }
+
+                if (option == 'E') {
+                    toastr.warning("Se ha producido un error :"+message);
+            }
+
+
+            // Cambiar el color del fondo del Grid.
+           // $(".table tbody tr:even").css("background-color", "#ddd");
+        });
+
+
+
+    </script>
+
+}

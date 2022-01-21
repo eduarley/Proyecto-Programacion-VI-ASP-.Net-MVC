@@ -1,0 +1,236 @@
+﻿
+@{
+    ViewBag.Title = "GraficoActivo";
+}
+
+
+<h2>Dashboard</h2>
+
+
+<div class="row">
+    <div class="col-md-6">
+        <canvas id="contenedor1"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="contenedor2"></canvas>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-6">
+        <canvas id="contenedor3"></canvas>
+    </div>
+    <div class="col-md-6">
+        <canvas id="contenedor4"></canvas>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.2/Chart.bundle.min.js"></script>
+
+    <script>
+
+        function start() {
+            Pie();
+            Bar();
+            Line();
+            Doughnut();
+        }
+        window.onload = start();
+
+        function Pie() {
+            
+            var PieChartData =
+            {
+                labels: [@Html.Raw(ViewBag.Etiquetas)],
+                datasets: [{
+                    label: 'Lista Activos',
+                    backgroundColor: [
+                      @Html.Raw( @ViewBag.Colores)
+                    ],
+                    borderWidth: 2,
+                    data: [@ViewBag.Valores]
+                }]
+            };
+
+
+                var ctx1 = document.getElementById("contenedor1").getContext("2d");
+                window.myBar = new Chart(ctx1,
+                    {
+                        type: 'pie',
+                        data: PieChartData,
+                        options:
+                        {
+                            display: true,
+                            animation: {
+                                duration: 1000 // general animation time
+                            },
+
+                            hover: {
+                                animationDuration: 3000 // duration of animations when hovering an item
+                            },
+                            responsiveAnimationDuration: 3000, // animation duration after a resize
+
+                            title:
+                            {
+                                display: true,
+                                text: "Cantidades"
+                            },
+                            responsive: true,
+                            maintainAspectRatio: true,
+
+                        }
+                    });
+
+           }
+
+           function Bar() {
+           
+            var BarChartData =
+            {
+                labels: [@Html.Raw(ViewBag.Etiquetas)],
+                datasets: [{
+                    label: 'Lista Activos',
+                    backgroundColor: [
+                      @Html.Raw( @ViewBag.Colores)
+                    ],
+                    borderWidth: 2,
+                    data: [@ViewBag.Valores]
+                }]
+            };
+
+
+                var ctx1 = document.getElementById("contenedor2").getContext("2d");
+                window.myBar = new Chart(ctx1,
+                    {
+                        type: 'bar',
+                        data: BarChartData,
+                        options:
+                        {
+                            animation: {
+                                duration: 1000 // general animation time
+                            },
+
+                            hover: {
+                                animationDuration: 3000 // duration of animations when hovering an item
+                            },
+                            responsiveAnimationDuration: 3000, // animation duration after a resize
+                             legend: { display: false },
+                            title:
+                            {
+                                display: true,
+                                text: "Cantidades"
+                            },
+                            responsive: true,
+                            maintainAspectRatio: true,
+
+                        }
+                });
+
+        }
+
+         function Line() {
+            
+            var BarChartData =
+            {
+                labels: [@Html.Raw(ViewBag.Etiquetas)],
+                datasets: [{
+                    label: 'Lista Activos',
+                    backgroundColor: [
+                      @Html.Raw( @ViewBag.Colores)
+                    ],
+                    fill: false,
+                     borderColor: 'orange',
+                    backgroundColor: 'transparent',
+                    borderWidth: 2,
+                    data: [@ViewBag.Valores]
+                }]
+            };
+
+
+                var ctx1 = document.getElementById("contenedor3").getContext("2d");
+                window.myBar = new Chart(ctx1,
+                    {
+                        type: 'line',
+                        data: BarChartData,
+                        options:
+                        {
+
+                            animation: {
+                                duration: 1000 // general animation time
+                            },
+
+                            hover: {
+                                animationDuration: 3000 // duration of animations when hovering an item
+                            },
+                            responsiveAnimationDuration: 3000, // animation duration after a resize
+
+                            title:
+                            {
+                                display: true,
+                                text: "Cantidades"
+                            },
+                            responsive: true,
+                            maintainAspectRatio: true,
+
+                        }
+                });
+
+        }
+
+
+
+        function Doughnut() {
+           
+            var PieChartData =
+            {
+                labels: [@Html.Raw(ViewBag.Etiquetas)],
+                datasets: [{
+                    label: 'Lista Activos',
+                    backgroundColor: [
+                      @Html.Raw( @ViewBag.Colores)
+                    ],
+                    borderWidth: 2,
+                    data: [@ViewBag.Valores]
+                }]
+            };
+
+
+                var ctx1 = document.getElementById("contenedor4").getContext("2d");
+                window.myBar = new Chart(ctx1,
+                    {
+                        type: 'doughnut',
+                        data: PieChartData,
+                        options:
+                        {
+                            display: true,
+                            animation: {
+                                duration: 1000 // general animation time
+                            },
+
+                            hover: {
+                                animationDuration: 3000 // duration of animations when hovering an item
+                            },
+                            responsiveAnimationDuration: 3000, // animation duration after a resize
+
+                            title:
+                            {
+                                display: true,
+                                text: "Cantidades"
+                            },
+                            responsive: true,
+                            maintainAspectRatio: true,
+
+                        }
+                    });
+
+           }
+    </script>
+
+}
+
+

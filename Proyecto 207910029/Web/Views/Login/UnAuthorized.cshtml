@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "UnAuthorized";
+}
+
+@{
+    Layout = Layout = "~/Views/Shared/_Login.cshtml"; ;
+}
+
+<h2>No Autorizado!</h2>
+<br>
+
+<input type="button" value="Back" class="btn btn-default" onclick="goBack()" />
+@*<p>
+    @Html.ActionLink("Iniciar Sesión", "Login","Login",null, htmlAttributes: new { @class = "btn btn-primary" })
+</p>*@
+
+<script>
+    function goBack() {
+        window.history.back();
+    }
+</script> 

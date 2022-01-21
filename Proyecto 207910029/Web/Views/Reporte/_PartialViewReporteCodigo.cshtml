@@ -1,0 +1,153 @@
+﻿@model Infraestructure.Models.Activo
+
+@if (Model != null)
+{
+    <div>
+        <h3>Detalles</h3>
+        <hr />
+        <dl class="dl-horizontal">
+
+            <div class="col-md-6">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Descripcion)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Descripcion)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Modelo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Modelo)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.FechaCompra)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.FechaCompra)
+                </dd>
+
+                <dt>
+                    @Html.DisplayName("Valor Actual")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.ValorActual)
+                </dd>
+
+
+                <dt>
+                    @Html.DisplayName("Valor de Compra")
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.CostoColon)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Usuario.Nombre)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Usuario.Nombre)
+                </dd>
+
+            </div>
+        </dl>
+
+        <div class="form-horizontal">
+            <dl class="col-md-6">
+                @if (Model.ImgActivo != null)
+                {
+                    <dt class="col-md-3">
+                        @Html.DisplayName("Foto")
+                    </dt>
+
+                    <dd class="col-md-3">
+                        <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.ImgActivo)" id="ImagenProducto" style="height:75px;width:75px">
+
+                    </dd>
+                }
+
+                @if (Model.ImgFactura != null)
+                {
+                    <dt class="col-md-3">
+                        @Html.DisplayName("Factura")
+                    </dt>
+
+                    <dd class="col-md-3">
+                        <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.ImgFactura)" id="ImagenProducto" style="height:75px;width:75px">
+
+                    </dd>
+                }
+
+
+
+            </dl>
+        </div>
+
+
+
+    </div>
+
+    
+    <hr />
+    <div style="margin-top:200px">
+        <h3>Depreciación</h3>
+        <table class="table">
+
+            <tr>
+                <th>
+                    @Html.DisplayName("Fecha")
+                </th>
+                <th>
+                    @Html.DisplayName("Depreciacion Mes")
+                </th>
+                <th>
+                    @Html.DisplayName("Depreciacion Acumulada")
+                </th>
+                <th>
+                    @Html.DisplayName("Valor Residual")
+                </th>
+
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model.Depreciacion)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepreciacionMes)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DepreciacionAcumulada)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.valorResidual)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+    </div>
+}
+else
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button><strong>El código del activo no existe!</strong>
+    </div>
+}
+
+

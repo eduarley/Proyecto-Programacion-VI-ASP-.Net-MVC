@@ -1,0 +1,105 @@
+﻿@model IEnumerable<Infraestructure.Models.Marca>
+
+@{
+    ViewBag.Title = "Lista Marcas";
+}
+
+<h2>Marcas</h2>
+
+<p>
+    @Html.ActionLink("Crear Nuevo", "Create", null, htmlAttributes: new { @class = "btn btn-success glyphicon-plus" })
+</p>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Id)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Descripcion)
+    </td>
+    <td>
+        @Html.ActionLink("Editar", "Edit", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-primary" })
+        @Html.ActionLink("Detalles", "Details", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+        @Html.ActionLink("Borrar", "Delete", new { id = item.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+    </td>
+</tr>
+    }
+
+</table>
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/toastjs")
+    @Scripts.Render("~/bundles/jqueryui")
+
+
+
+
+    <script>
+
+        $(document).ready(function () {
+             console.log("Entro a JQuery")
+
+            toastr.options = {
+                "closeButton": false,
+                "debug": false,
+                "newestOnTop": false,
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "preventDuplicates": false,
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "5000",
+                "extendedTimeOut": "5000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+                // Recibe los parámetros del Controller
+                var option = '@TempData["Action"]'
+                var message = '@TempData["Message"]'
+
+
+                if (option == 'S') {
+                    toastr.success("El registro fue salvado correctamente");
+                }
+
+
+                 if (option == 'D') {
+                    toastr.success("El registro fue borrado correctamente");
+                }
+
+
+                 if (option == 'U') {
+                    toastr.success("El registro fue actualizado correctamente");
+                }
+
+                if (option == 'E') {
+                    toastr.warning("Se ha producido un error :"+message);
+            }
+
+
+            // Cambiar el color del fondo del Grid.
+            //$(".table tbody tr:even").css("background-color", "#ddd");
+        });
+
+
+
+    </script>
+
+}

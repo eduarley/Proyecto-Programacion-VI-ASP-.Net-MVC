@@ -1,0 +1,77 @@
+﻿@model Infraestructure.Models.Vendedor
+
+@{
+    ViewBag.Title = "Borrar Vendedor";
+}
+
+<h2>Borrar</h2>
+
+<h3>Seguro que deseas borrar?</h3>
+@if (TempData["Message"] != null)
+{
+    string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>&times;</span> </button>
+<strong>Error!</strong> " + TempData["Message"] + " </div>";
+
+@Html.Raw(mensaje);
+}
+<div>
+
+    @using (Html.BeginForm("DeleteConfirmed", "Vendedor", new { id = Model.CedulaJuridica }, FormMethod.Post))
+    {
+        <h4>Vendedor</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.CedulaJuridica)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CedulaJuridica)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Ente)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Ente)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Telefono)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Telefono)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Direccion)
+            </dd>
+
+        </dl>
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver a la Lista", "List")
+        </div>
+    }
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+}

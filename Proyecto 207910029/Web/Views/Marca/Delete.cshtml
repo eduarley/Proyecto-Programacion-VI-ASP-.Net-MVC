@@ -1,0 +1,49 @@
+﻿@model Infraestructure.Models.Marca
+
+@{
+    ViewBag.Title = "Borrar Marca";
+}
+
+<h2>Borrar</h2>
+
+<h3>Seguro que deseas borrar?</h3>
+@if (TempData["Message"] != null)
+{
+    string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>&times;</span> </button>
+<strong>Error!</strong> " + TempData["Message"] + " </div>";
+
+@Html.Raw(mensaje);
+}
+<div>
+    
+    <hr />
+    @using (Html.BeginForm("DeleteConfirmed", "Marca", new { id = Model.Id }, FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Id)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Descripcion)
+            </dd>
+
+        </dl>
+
+
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Borrar" class="btn btn-danger" /> |
+            @Html.ActionLink("Volver a la Lista", "List")
+        </div>
+    }
+</div>

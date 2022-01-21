@@ -1,0 +1,54 @@
+﻿@model Infraestructure.Models.Activo
+
+@{
+    ViewBag.Title = "ReporteVencimientoGarantia";
+}
+
+<h2>Vencimiento de garantías</h2>
+
+
+@using (Ajax.BeginForm("AjaxVencimientoGarantia", "Reporte", new { fechaInicio = "fechaInicio", fechaFin = "fechaFin" }, new AjaxOptions
+{
+
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado"
+}, new { id = "AjaxForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+        <div class="form-group">
+            @Html.Label("Fecha Inicial", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" id="fechaInicio" name="fechaInicio" required class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.Label("Fecha Final", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" required id="fechaFin" name="fechaFin" class="form-control" />
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Consultar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="resultado"></div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+}

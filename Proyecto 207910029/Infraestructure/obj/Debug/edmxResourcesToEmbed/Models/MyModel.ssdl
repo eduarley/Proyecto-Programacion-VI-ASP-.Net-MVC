@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ProyectoModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Activo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="IdUsuario" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Serie" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="IdAseguradora" Type="int" />
+    <Property Name="IdTipoActivo" Type="int" Nullable="false" />
+    <Property Name="IdMarca" Type="int" Nullable="false" />
+    <Property Name="CedJurVendedor" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Modelo" Type="varchar" MaxLength="20" />
+    <Property Name="FechaCompra" Type="date" Nullable="false" />
+    <Property Name="VencimientoGarantia" Type="date" />
+    <Property Name="VencimientoSeguro" Type="date" />
+    <Property Name="ValorActual" Type="money" />
+    <Property Name="CostoDolar" Type="money" />
+    <Property Name="CostoColon" Type="money" Nullable="false" />
+    <Property Name="Condicion" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="ImgFactura" Type="varbinary(max)" />
+    <Property Name="ImgActivo" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Aseguradora">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Depreciacion">
+    <Key>
+      <PropertyRef Name="Consecutivo" />
+    </Key>
+    <Property Name="Consecutivo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IdActivo" Type="int" Nullable="false" />
+    <Property Name="Fecha" Type="date" Nullable="false" />
+    <Property Name="DepreciacionMes" Type="money" />
+    <Property Name="DepreciacionAcumulada" Type="money" />
+    <Property Name="valorResidual" Type="money" />
+  </EntityType>
+  <EntityType Name="Marca">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Rol">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="25" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoActivo">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="Descripcion" Type="varchar" MaxLength="25" Nullable="false" />
+    <Property Name="VidaUtil" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="varchar" MaxLength="9" Nullable="false" />
+    <Property Name="Nombre" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Apellidos" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="IdRol" Type="int" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="30" />
+    <Property Name="Telefono" Type="varchar" MaxLength="8" />
+    <Property Name="PasswordHash" Type="char" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vendedor">
+    <Key>
+      <PropertyRef Name="CedulaJuridica" />
+    </Key>
+    <Property Name="CedulaJuridica" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Ente" Type="varchar" MaxLength="30" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="30" />
+    <Property Name="Telefono" Type="varchar" MaxLength="8" />
+    <Property Name="Direccion" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_ACTIVO_ASEGURADORA">
+    <End Role="Aseguradora" Type="Self.Aseguradora" Multiplicity="0..1" />
+    <End Role="Activo" Type="Self.Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Aseguradora">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdAseguradora" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_MARCA">
+    <End Role="Marca" Type="Self.Marca" Multiplicity="1" />
+    <End Role="Activo" Type="Self.Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marca">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdMarca" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_TIPOACTIVO">
+    <End Role="TipoActivo" Type="Self.TipoActivo" Multiplicity="1" />
+    <End Role="Activo" Type="Self.Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoActivo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdTipoActivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Activo_Usuario">
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="1" />
+    <End Role="Activo" Type="Self.Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ACTIVO_VENDEDOR">
+    <End Role="Vendedor" Type="Self.Vendedor" Multiplicity="1" />
+    <End Role="Activo" Type="Self.Activo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Vendedor">
+        <PropertyRef Name="CedulaJuridica" />
+      </Principal>
+      <Dependent Role="Activo">
+        <PropertyRef Name="CedJurVendedor" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Depreciacion_Activo">
+    <End Role="Activo" Type="Self.Activo" Multiplicity="1" />
+    <End Role="Depreciacion" Type="Self.Depreciacion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Activo">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Depreciacion">
+        <PropertyRef Name="IdActivo" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USUARIO_ROL">
+    <End Role="Rol" Type="Self.Rol" Multiplicity="1" />
+    <End Role="Usuario" Type="Self.Usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rol">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Usuario">
+        <PropertyRef Name="IdRol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ProyectoModelStoreContainer">
+    <EntitySet Name="Activo" EntityType="Self.Activo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Aseguradora" EntityType="Self.Aseguradora" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Depreciacion" EntityType="Self.Depreciacion" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Marca" EntityType="Self.Marca" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoActivo" EntityType="Self.TipoActivo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vendedor" EntityType="Self.Vendedor" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ACTIVO_ASEGURADORA" Association="Self.FK_ACTIVO_ASEGURADORA">
+      <End Role="Aseguradora" EntitySet="Aseguradora" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_MARCA" Association="Self.FK_ACTIVO_MARCA">
+      <End Role="Marca" EntitySet="Marca" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_TIPOACTIVO" Association="Self.FK_ACTIVO_TIPOACTIVO">
+      <End Role="TipoActivo" EntitySet="TipoActivo" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Activo_Usuario" Association="Self.FK_Activo_Usuario">
+      <End Role="Usuario" EntitySet="Usuario" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ACTIVO_VENDEDOR" Association="Self.FK_ACTIVO_VENDEDOR">
+      <End Role="Vendedor" EntitySet="Vendedor" />
+      <End Role="Activo" EntitySet="Activo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Depreciacion_Activo" Association="Self.FK_Depreciacion_Activo">
+      <End Role="Activo" EntitySet="Activo" />
+      <End Role="Depreciacion" EntitySet="Depreciacion" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USUARIO_ROL" Association="Self.FK_USUARIO_ROL">
+      <End Role="Rol" EntitySet="Rol" />
+      <End Role="Usuario" EntitySet="Usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

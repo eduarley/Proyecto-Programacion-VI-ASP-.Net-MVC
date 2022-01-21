@@ -1,0 +1,168 @@
+﻿@model Infraestructure.Models.Activo
+
+@{
+    ViewBag.Title = "Detalles Activo";
+}
+
+<h2>Detalles</h2>
+
+<div>
+    <h4>Activo</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Serie)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Serie)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Modelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaCompra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FechaCompra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VencimientoGarantia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VencimientoGarantia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.VencimientoSeguro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.VencimientoSeguro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorActual)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostoDolar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostoDolar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CostoColon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CostoColon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Condicion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Condicion)
+        </dd>
+
+        <dt>
+            Factura
+        </dt>
+
+        <dd>
+            @if (Model.ImgFactura != null)
+            {
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.ImgFactura)" id="ImagenProducto" style="height:75px;width:75px">
+            }
+            else
+            {
+                <p>Sin Imagen</p> 
+            }
+        </dd>
+
+        <dt>
+            Foto
+        </dt>
+
+        <dd>
+            @if (Model.ImgActivo != null)
+            {
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.ImgActivo)" id="ImagenProducto" style="height:75px;width:75px">
+            }
+            else
+            {
+                <p>Sin Imagen</p>
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Aseguradora.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Aseguradora.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoActivo.Descripcion)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoActivo.Descripcion)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Usuario.Nombre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Vendedor.Ente)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Vendedor.Ente)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Volver a la lista", "List")
+</p>

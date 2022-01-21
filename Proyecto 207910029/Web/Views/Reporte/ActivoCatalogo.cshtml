@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Infraestructure.Models.Activo>
+
+@{
+    ViewBag.Title = "Catalogo";
+}
+
+<h2>Activo Catálogo</h2>
+
+<p>
+    @Html.ActionLink("Reporte PDF", "CreatePdfActivoCatalogo", "Reporte")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Serie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Modelo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ValorActual)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoDolar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CostoColon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Condicion)
+        </th>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.Aseguradora.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Marca.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoActivo.Descripcion)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vendedor.Ente)
+        </th>
+
+        <th>
+            @Html.DisplayName("Imagen")
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Serie)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Modelo)
+        </td>   
+        <td>
+            @Html.DisplayFor(modelItem => item.ValorActual)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostoDolar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CostoColon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Condicion)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Aseguradora.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Marca.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TipoActivo.Descripcion)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vendedor.Ente)
+        </td>
+        <td>
+            @if (item.ImgActivo != null)
+            {
+                <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(item.ImgActivo)" id="ImagenProducto" style="height:75px;width:75px">
+
+            }
+            else
+            {
+                <p>Sin imagen</p>
+            }
+        </td>
+    </tr>
+}
+
+</table>
+
+
+@{ 
+    decimal? total = 0;
+    foreach (var item in Model)
+    {
+        total += item.ValorActual;
+    }
+
+    <p><b>Valor total de los activos: @total.Value.ToString("0.00")</b></p>
+
+
+}

@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ReporteCierreCalculo";
+}
+
+
+
+
+
+@using (Ajax.BeginForm("AjaxReporteCierreCalculo", "Reporte", new { fecha = "fecha"}, new AjaxOptions
+{
+
+    HttpMethod = "POST",
+    UpdateTargetId = "resultado"
+}, new { id = "AjaxForm" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+
+
+        <div class="form-group">
+            @Html.Label("Mes a consultar", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date"  id="fecha" name="fecha" required class="form-control" />
+            </div>
+        </div>
+     
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Calcular" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div id="resultado"></div>
+
+
+
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/jqueryajax")
+}

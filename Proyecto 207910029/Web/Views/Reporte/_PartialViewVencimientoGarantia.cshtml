@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Infraestructure.Models.Activo>
+
+@{
+    ViewBag.Title = "_PartialViewVencimientoGarantia";
+}
+
+@if (Model.Count() != 0)
+{
+    <table class="table">
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Modelo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaCompra)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VencimientoGarantia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VencimientoSeguro)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Modelo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FechaCompra)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VencimientoGarantia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VencimientoSeguro)
+                </td>
+
+
+            </tr>
+        }
+
+    </table>
+
+}
+else
+{
+    <div class="alert alert-danger alert-dismissible" role="alert">
+        <button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+            <span aria-hidden='true'>&times;</span>
+        </button><strong>No hay activos cuyo vencimiento de garantía esté entre los rangos solicitados!</strong>
+    </div>
+}
+

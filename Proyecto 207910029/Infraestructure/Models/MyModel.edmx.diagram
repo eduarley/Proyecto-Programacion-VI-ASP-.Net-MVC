@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9125a636a3ec4ae5820e062f704a829a" Name="Diagram1">
+        <EntityTypeShape EntityType="ProyectoModel.Activo" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Aseguradora" Width="1.5" PointX="7.625" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Depreciacion" Width="2.75" PointX="1.375" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Marca" Width="1.5" PointX="7.625" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Rol" Width="1.5" PointX="1" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.TipoActivo" Width="1.5" PointX="7.75" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Usuario" Width="1.5" PointX="3.25" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ProyectoModel.Vendedor" Width="1.5" PointX="7.625" PointY="4.25" IsExpanded="true" />
+        <AssociationConnector Association="ProyectoModel.FK_ACTIVO_ASEGURADORA" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_ACTIVO_MARCA" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_ACTIVO_TIPOACTIVO" ManuallyRouted="true" >
+          <ConnectorPoint PointX="7.75" PointY="7.672841796875" />
+          <ConnectorPoint PointX="6" PointY="7.672841796875" />
+          <ConnectorPoint PointX="6" PointY="6.759013671875" />
+        </AssociationConnector>
+        <AssociationConnector Association="ProyectoModel.FK_Activo_Usuario" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_ACTIVO_VENDEDOR" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_DEPRECIACION_ACTIVO" ManuallyRouted="false" />
+        <AssociationConnector Association="ProyectoModel.FK_USUARIO_ROL" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,347 @@
+﻿@model Infraestructure.Models.Activo
+
+@{
+    ViewBag.Title = "Editar Activo";
+}
+
+<h2>Editar</h2>
+@if (TempData["Message"] != null)
+{
+    string mensaje = @"<div class='alert alert-danger alert-dismissible' role='alert'><button type='button' class='close' data-dismiss='alert' aria-label='Close'>
+<span aria-hidden='true'>&times;</span> </button>
+<strong>Error!</strong> " + TempData["Message"] + " </div>";
+
+@Html.Raw(mensaje);
+}
+
+@using (Html.BeginForm("Save", "Activo", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Activo</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="col-md-6">
+            <div class="form-group">
+                @Html.LabelFor(model => model.Id, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.Id, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdUsuario, "Usuario", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.IdUsuario, new SelectList(ViewBag.ListaUsuarios, "Id", "Id"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdUsuario, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Descripcion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Descripcion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdAseguradora, "Aseguradora", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.IdAseguradora, new SelectList(ViewBag.ListaAseguradoras, "Id", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdAseguradora, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.IdTipoActivo, "Tipo", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.IdTipoActivo, new SelectList(ViewBag.ListaTipoActivos, "Id", "Descripcion"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.IdTipoActivo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                @Html.Label("Código Marca", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.IdMarca, new { @class = "form-control", @id = "txtCodigoProducto" })
+                    @Html.Label("txtDescripcionProducto", "-", htmlAttributes: new { @class = "control-label" })
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CedJurVendedor, "Vendedor", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(m => m.CedJurVendedor, new SelectList(ViewBag.ListaVendedores, "CedulaJuridica", "Ente"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CedJurVendedor, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Modelo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Modelo, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Modelo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FechaCompra, "Compra", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.FechaCompra, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.FechaCompra, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="form-horizontal">
+        <div class="col-md-6">
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VencimientoGarantia, "Vencimiento Garantía", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VencimientoGarantia, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VencimientoGarantia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VencimientoSeguro, "Vencimiento Seguro", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.VencimientoSeguro, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.VencimientoSeguro, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ValorActual, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ValorActual, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(model => model.ValorActual, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CostoColon, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.CostoColon, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.CostoColon, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div class="form-group">
+                <div class="control-label col-md-2">Compra:</div>
+
+                <div class="col-md-2">
+                    @if (@ViewBag.Compra != null)
+                    {
+                        <div class="control-label col-md-2"><b>₡@ViewBag.Compra</b></div>
+                    }
+                </div>
+                <div class="control-label col-md-2">Venta:</div>
+                <div class="col-md-2">
+                    @if (@ViewBag.Venta != null)
+                    {
+                        <div class="control-label col-md-2"><b>₡@ViewBag.Venta</b></div>
+                    }
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Condicion, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Condicion, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.DropDownListFor(m => m.Condicion, new SelectList(ViewBag.ListaCondiciones), new { @class = "form-control" })
+
+                    @Html.ValidationMessageFor(model => model.Condicion, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImgActivo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model.ImgActivo != null)
+                    {
+                        <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.ImgActivo)" id="ImagenProducto" style="height:75px;width:75px">
+                    }
+                    <input type="file" name="ImageFile" />
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ImgFactura, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @if (Model.ImgFactura != null)
+                    {
+                        <input type="image" src="data:image/jpeg;charset=utf-8;base64,@Convert.ToBase64String(Model.ImgFactura)" id="ImagenProducto" style="height:75px;width:75px">
+                    }
+
+                    <input type="file" name="ImageFile" />
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-12">
+                <input type="submit" value="Actualizar" class="btn btn-primary btn-block pull-left" />
+            </div>
+
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Volver a la lista", "List")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*Se utilizan para el Autocomplete*@
+    @Scripts.Render("~/bundles/jqueryui")
+    @Styles.Render("~/Content/cssjqueryui")
+
+
+    <script type="text/javascript">
+        ////////////////////////////
+        // Foco sobre cliente    //
+        ///////////////////////////
+        $("#IdMarca").focus(function () {
+            // Limpia la caja de texto
+            $("#IdMarca").val("");
+            // Limpia el código almacenado
+            console.log($("label[for*='NombreMarca']").html());
+            $("label[for*='NombreMarca']").html("-");
+            // Coloca la imagen defecto
+            //$("#ImgProducto").attr("src", "/Images/nophoto.jpg");
+        });
+    </script>
+
+    <script>
+        ////////////////////////////////////////////////////
+        // Busca Marca por descripcion //
+        /////////////////////////////////////////////////////
+
+        //$("#IdMarca").autocomplete({
+        //    source: function (request, response) {
+        //        var texto = $("#IdMarca").val();
+        //        debugger;
+        //        console.log(texto);
+        //        $.ajax({
+        //            type: "GET",
+        //            url: "/Activo/GetMarcaByName",
+        //            dataType: "json",
+        //            data: { name: texto },
+        //            success: function (data) {
+        //                response($.map(data, function (item) {
+        //                    console.log(item.Nombre);
+        //                    debugger;
+        //                    return { label:  item.Descripcion };
+        //                }));
+        //            },
+        //            error: function (xhr, status, error) {
+        //                 xhr.requestText
+        //                 debugger;
+        //                alert("Error: " + error + ", No Error: " + xhr.status);
+        //            },
+        //        });
+        //    },
+        //    select: function (event, ui) {
+
+
+        //        $("#IdMarca").val(ui.item.value);
+        //        $("label[for*='NombreMarca']").html(ui.item.label)
+
+        //        return false;
+        //    }
+        //});
+
+
+        //////////////////////////////////////////////
+        // Busca el código del producto por nombre  //
+        //////////////////////////////////////////////
+        $("#txtCodigoProducto").focus(function () {
+            // Limpia la caja de texto
+            $("#txtCodigoProducto").val("");
+
+            $("label[for*='txtDescripcionProducto']").html("-");
+            $("#txtPrecioProducto").val("");
+            $("#txtCantidadProducto").val("1");
+        });
+
+        // var precioProducto = 0.0;
+        // Click encima del codigo del producto para buscarlo
+        $("#txtCodigoProducto").autocomplete({
+            source: function (request, response) {
+                // Limpiar la imagen
+                //$("#ImgProducto").attr("src", "/Images/nophoto.jpg");
+                // leer los datos de la descripción
+                var texto = $("#txtCodigoProducto").val();
+                // Invocar al Controller por Ajax
+                $.ajax({
+                    type: "GET",
+                    url: "/Activo/GetMarcaByName",
+                    dataType: "json",
+                    data: { name: texto },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+
+                            // Label lo que muestra e item lo que coloca en la caja de texto, data para todo el objeto seleccionado.
+                            return { label: item.Descripcion, value: item.Id, data: item };
+
+                        }));
+                    },
+                    error: function (xhr, status, error) {
+
+                        // debugger;
+                        alert("Error: " + error + ", No Error: " + xhr.status);
+                    },
+                });
+            },
+            select: function (event, ui) {
+
+                // Colocar el valor
+                $("#txtCodigoProducto").val(ui.item.value);
+                // Coloca el precio
+                //$("#txtPrecioProducto").val(ui.item.data.Precio);
+                // Coloca datos en el Label
+                $("label[for*='txtDescripcionProducto']").html(ui.item.label);
+                // Muestra la imagen que  por venir en un NewtonSoft Json ya viene serializada en base64 NO hay que convertirla
+                //$("#ImgProducto").attr("src", "data:image/jpeg;charset=utf-8;base64," + ui.item.data.Imagen);
+                // Coloca el foto
+                //$("txtCantidadProducto").focus();
+                // Se sale
+                return false;
+            }, statusCode: {
+                404: function (content) { alert('cannot find resource'); },
+                500: function (content) { alert('internal server error'); }
+            },
+            error: function (xhr, status, error) {
+                // Muestra posibles errores
+                alert("Error: " + error + ", No Error: " + xhr.status);
+            }
+        });
+    </script>
+}

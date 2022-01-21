@@ -1,0 +1,122 @@
+﻿<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+
+
+
+            <a class="navbar-brand" href="#brand">
+                <img src="~/Images/logo-blanco-corto.png" class="logo" height="20" alt="logo">
+            </a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            @*@Html.ActionLink("Nombre de la aplicación", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })*@
+
+
+
+
+        </div>
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Mantenimiento <span class="glyphicon  glyphicon glyphicon-plus" />
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Vendedor", "List", "Vendedor")</li>
+                        <li class="nav-divider"></li>
+                        <li>@Html.ActionLink("Activo", "List", "Activo")</li>
+                        <li class="nav-divider"></li>
+                        <li>@Html.ActionLink("Tipo Activo", "List", "TipoActivo")</li>
+                        <li class="nav-divider"></li>
+                        <li>@Html.ActionLink("Marca", "List", "Marca")</li>
+                         <li class="nav-divider"></li>
+                        <li>@Html.ActionLink("Aseguradora", "List", "Aseguradora")</li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Procesos <span class="glyphicon  glyphicon glyphicon-usd" />
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Cálculo Depreciación", "Index", "Depreciacion")</li>
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Reportes <span class="glyphicon  glyphicon glyphicon-list" />
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Catálogo (PDF)", "ActivoCatalogo", "Reporte")</li>
+                        <li>@Html.ActionLink("Por Código", "ReportePorCodigo", "Reporte")</li>
+                        <li>@Html.ActionLink("Vencimiento de Garantías", "ReporteVencimientoGarantia", "Reporte")</li>
+                        <li>@Html.ActionLink("Gráfico de Activos por Tipo de Activo", "GraficoActivo", "Reporte")</li>
+                        <li>@Html.ActionLink("Cierres del Cálculo de Depreciación", "ReporteCierreCalculo", "Reporte")</li>
+                        <li>@Html.ActionLink("Reporte analítico", "ReporteAnalitico", "Reporte")</li>
+
+                    </ul>
+                </li>
+
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Administración <span class="glyphicon  glyphicon glyphicon-cog" />
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>@Html.ActionLink("Seguridad", "List", "Usuario")</li>
+                    </ul>
+                </li>
+
+                <li>
+                    @Html.ActionLink("Autocalificación", "AutoCalificacion", "Home")
+                    
+                    @*<a href="#">Auto Calificación <span class="glyphicon  glyphicon glyphicon-thumbs-up" /></a>*@
+                </li>
+            </ul>
+
+            
+            <ul class="nav navbar-nav navbar-right">
+
+
+
+                <li>
+                    @{
+                        string nombre = "";
+                        Infraestructure.Models.Usuario oUsuario;
+                        // Validar si vienen datos en la session
+                        if (Session["User"] != null)
+                        {
+                            // Casting
+                            oUsuario = Session["User"] as Infraestructure.Models.Usuario;
+
+                            if (oUsuario != null)
+                            {
+                                nombre = $"{oUsuario.Nombre} {oUsuario.Apellidos}";
+                            }
+                        }
+
+
+                    }
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Usuario: @nombre
+                        <span class="glyphicon  glyphicon-user " aria-hidden="true"></span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="@Url.Action("Logout", "Login")">Logout<span class="glyphicon   glyphicon-log-out" aria-hidden="true"></span></a>
+                        </li>
+                    </ul>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+</div>
